@@ -9,7 +9,7 @@ Time spent: **5** hours spent in total
 ## Summary
 
 **Tap PokeAPI** is an android app that **displays a random Pokemon and its info when you tap the button!**
-If I had to describe this project in three (3) emojis, they would be: **emojis here**
+If I had to describe this project in three (3) emojis, they would be: **❗ 📖 🥇**
 
 ## Application Features
 
@@ -40,9 +40,9 @@ My chosen API for this project is **PokeAPI**.
 
 Here's a video / GIF that demos all of the app's implemented features:
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Demo' width='' alt='Video Demo' />
+<img src='https://i.imgur.com/Cfo5QF7.gif' title='Video Demo' width='' alt='Video Demo' />
 
-GIF created with **your chosen GIF tool**
+GIF created with **LICEcap**
 
 <!-- Recommended tools:
 - [Kap](https://getkap.co/) for macOS
@@ -52,10 +52,12 @@ GIF created with **your chosen GIF tool**
 ## Notes
 
 Here's a place for any other notes on the app, it's creation process, or what you learned this unit!
+- understand api endpoints
+- how to incorporate access to web 
 
 ## License
 
-Copyright **yyyy** **your name**
+Copyright **2024** **Reneca Capuno**
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
