@@ -1,106 +1,112 @@
 package com.example.and101_p5_api_curr
 
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.os.AsyncTask
+
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.codepath.asynchttpclient.AsyncHttpClient
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler
-import org.json.JSONException
-import org.json.JSONObject
-import java.io.InputStream
-import java.net.HttpURLConnection
-import java.net.URL
-
 import com.example.and101_p5_api_curr.R
 import okhttp3.Headers
-import okhttp3.internal.http2.Header
+import org.json.JSONArray
+import org.json.JSONException
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var fetchPokemonButton: Button
-    private lateinit var pokemonImageView: ImageView
-    private lateinit var pokemonNameTextView: TextView
-    private lateinit var pokemonIdTextView: TextView
-    private lateinit var pokemonTypeTextView: TextView
+    private lateinit var pokemonRecyclerView: RecyclerView
+    private lateinit var pokemonAdapter: PokemonAdapter
+    private val pokemonList = mutableListOf<Pokemon>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         fetchPokemonButton = findViewById(R.id.fetchPokemonButton)
-        pokemonImageView = findViewById(R.id.pokemonImageView)
-        pokemonNameTextView = findViewById(R.id.pokemonNameTextView)
-        pokemonIdTextView = findViewById(R.id.pokemonIdTextView)
-        pokemonTypeTextView = findViewById(R.id.pokemonTypeTextView)
+        pokemonRecyclerView = findViewById(R.id.pokemonRecyclerView)
+        pokemonAdapter = PokemonAdapter(pokemonList)
+        pokemonRecyclerView.adapter = pokemonAdapter
+        pokemonRecyclerView.layoutManager = LinearLayoutManager(this)
 
         fetchPokemonButton.setOnClickListener {
-            fetchRandomPokemon()
+            fetchPokemonList()
         }
     }
 
-    private fun fetchRandomPokemon() {
+    private fun fetchPokemonList() {
         val client = AsyncHttpClient()
-        client["https://pokeapi.co/api/v2/pokemon/${getRandomPokemonId()}", object : JsonHttpResponseHandler() {
+        client["https://pokeapi.co/api/v2/pokemon?limit=20", object : JsonHttpResponseHandler() {
             override fun onFailure(
                 statusCode: Int,
                 headers: Headers?,
                 errorResponse: String,
                 throwable: Throwable?
-            ) { Log.e(TAG, "Failed to fetch Pokémon data")
+            ) {
+                Log.e(TAG, "Failed to fetch Pokémon list")
             }
 
             override fun onSuccess(statusCode: Int, headers: Headers, json: JsonHttpResponseHandler.JSON) {
                 try {
-                    val pokemonName = json.jsonObject.getString("name")
-                    val pokemonId = json.jsonObject.getInt("id")
-                    val pokemonTypes = json.jsonObject.getJSONArray("types").getJSONObject(0).getJSONObject("type").getString("name")
-                    val pokemonImageUrl = json.jsonObject.getJSONObject("sprites").getString("front_default")
-
-                    updateUI(pokemonName, pokemonId, pokemonTypes, pokemonImageUrl)
+                    val results = json.jsonObject.getJSONArray("results")
+                    for (i in 0 until results.length()) {
+                        val pokemonObject = results.getJSONObject(i)
+                        val pokemonName = pokemonObject.getString("name")
+                        val pokemonUrl = pokemonObject.getString("url")
+                        fetchPokemonDetails(pokemonName, pokemonUrl)
+                    }
                 } catch (e: JSONException) {
                     Log.e(TAG, "JSON Exception", e)
                 }
             }
-
         }]
     }
 
-    private fun updateUI(name: String, id: Int, types: String, imageUrl: String) {
-        pokemonNameTextView.text = "Name: $name"
-        pokemonIdTextView.text = "ID: $id"
-        pokemonTypeTextView.text = "Type: $types"
-        LoadImageFromUrl(pokemonImageView).execute(imageUrl)
-    }
-
-    private fun getRandomPokemonId(): Int {
-        return (1..898).random() // Total number of Pokémon in the PokeAPI is 898
-    }
-
-    private inner class LoadImageFromUrl(private val imageView: ImageView) : AsyncTask<String, Void, Bitmap?>() {
-        override fun doInBackground(vararg urls: String): Bitmap? {
-            val imageUrl = urls[0]
-            var bitmap: Bitmap? = null
-            try {
-                val inputStream: InputStream = URL(imageUrl).openStream()
-                bitmap = BitmapFactory.decodeStream(inputStream)
-            } catch (e: Exception) {
-                Log.e(TAG, "Error loading image from URL", e)
+    private fun fetchPokemonDetails(name: String, url: String) {
+        val client = AsyncHttpClient()
+        client[url, object : JsonHttpResponseHandler() {
+            override fun onFailure(
+                statusCode: Int,
+                headers: Headers?,
+                errorResponse: String,
+                throwable: Throwable?
+            ) {
+                Log.e(TAG, "Failed to fetch Pokémon details")
             }
-            return bitmap
-        }
 
-        override fun onPostExecute(result: Bitmap?) {
-            imageView.setImageBitmap(result)
+            override fun onSuccess(statusCode: Int, headers: Headers, json: JsonHttpResponseHandler.JSON) {
+                try {
+                    val pokemonId = json.jsonObject.getInt("id")
+                    val pokemonTypes = json.jsonObject.getJSONArray("types")
+                    val pokemonImageUrl = json.jsonObject.getJSONObject("sprites").getString("front_default")
+                    val pokemonHeight = json.jsonObject.getInt("height")
+                    val pokemonWeight = json.jsonObject.getInt("weight")
+                    val pokemon = Pokemon(name, pokemonId, getPokemonTypes(pokemonTypes), pokemonImageUrl, pokemonHeight, pokemonWeight)
+
+                    pokemonList.add(pokemon)
+                    pokemonAdapter.notifyDataSetChanged()
+                } catch (e: JSONException) {
+                    Log.e(TAG, "JSON Exception", e)
+                }
+            }
+        }]
+    }
+
+    private fun getPokemonTypes(types: JSONArray): String {
+        val typeList = mutableListOf<String>()
+        for (i in 0 until types.length()) {
+            val type = types.getJSONObject(i).getJSONObject("type").getString("name")
+            typeList.add(type)
         }
+        return typeList.joinToString(", ")
     }
 
     companion object {
         private const val TAG = "MainActivity"
     }
 }
+
+data class Pokemon(val name: String, val id: Int, val types: String, val imageUrl: String, val height: Int, val weight: Int)
+
