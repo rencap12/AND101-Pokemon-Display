@@ -1,15 +1,16 @@
 <!-- (This is a comment) INSTRUCTIONS: Go through this page and fill out any **bolded** entries with their correct values.-->
 
-# AND101 Project 5 - Choose Your Own API
+# AND101 Project 6 - CYOAPI Part 2: RecyclerView Edition
 
 Submitted by: **Reneca Capuno**
 
-Time spent: **5** hours spent in total
+Time spent: **6** hours spent in total
 
 ## Summary
 
-**Tap PokeAPI** is an android app that **displays a random Pokemon and its info when you tap the button!**
-If I had to describe this project in three (3) emojis, they would be: **❗ 📖 🥇**
+**Poke Present** is an android app that **displays a scrollable list of Pokemon with their respective name, height, and weight!**
+
+If I had to describe this project in three (3) emojis, they would be: ** ❗ ⬆️ 🧠 **
 
 ## Application Features
 
@@ -18,29 +19,27 @@ If I had to describe this project in three (3) emojis, they would be: **❗ 📖
 The following REQUIRED features are completed:
 
 - [x] Make an API call to an API of your choice using AsyncHTTPClient
-- [x] Display at least three (3) pieces of data for each API entry retrieved
-- [x] A working Button requests a new API entry and updates the data displayed
+- [x] Implement a RecyclerView to display a list of entries from the API
+- [x] Display at least three (3) pieces of data for each RecyclerView item
 
 The following STRETCH features are implemented:
 
-- [ ] Add a query to the API request
-  - The query I added is **FILL IN HERE**
-- [ ] Build a UI to allow users to add that query
+- [ ] Add a UI element for the user to interact with API further
+- [ ] Show a `Toast` or `Snackbar` when an item is clicked
+- [ ] Add item dividers with `DividerItemDecoration`
 
 The following EXTRA features are implemented:
 
-- [x] List anything else that you added to improve the app!
-- Background, text, and button color
+- [ ] List anything else that you added to improve the app!
 
-## API Choice
-
-My chosen API for this project is **PokeAPI**.
+- Updated MainActivity.kt: Implemented logic in MainActivity.kt to fetch Pokémon data from the PokeAPI and populate the RecyclerView with Pokémon entries.
+- Defined Pokemon Data Class: Created a data class named Pokemon to represent Pokémon objects, containing properties such as name, id, types, imageUrl, height, and weight.
 
 ## Video Demo
 
 Here's a video / GIF that demos all of the app's implemented features:
 
-<img src='https://i.imgur.com/Cfo5QF7.gif' title='Video Demo' width='' alt='Video Demo' />
+<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Demo' width='' alt='Video Demo' />
 
 GIF created with **LICEcap**
 
@@ -52,8 +51,6 @@ GIF created with **LICEcap**
 ## Notes
 
 Here's a place for any other notes on the app, it's creation process, or what you learned this unit!
-- understand api endpoints
-- how to incorporate access to web 
 
 ## License
 
