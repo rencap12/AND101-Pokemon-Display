@@ -1,16 +1,16 @@
 <!-- (This is a comment) INSTRUCTIONS: Go through this page and fill out any **bolded** entries with their correct values.-->
 
-# AND101 Project 6 - CYOAPI Part 2: RecyclerView Edition
+# AND101 Project 7 - CYOAPI Part 3: Beautified
 
 Submitted by: **Reneca Capuno**
 
-Time spent: **6** hours spent in total
+Time spent: **3** hours spent in total
 
 ## Summary
 
-**Poke Present** is an android app that **displays a scrollable list of Pokemon with their respective name, height, and weight!**
+**Tap! Pokémon!** is an android app that **displays a list of Pokémon and relevant information for each within an intuitive layout**
 
-If I had to describe this project in three (3) emojis, they would be: ** ❗ ⬆️ 🧠 **
+If I had to describe this project in three (3) emojis, they would be: **✒️ 🎨 ⏩**
 
 ## Application Features
 
@@ -18,28 +18,27 @@ If I had to describe this project in three (3) emojis, they would be: ** ❗ ⬆
 
 The following REQUIRED features are completed:
 
-- [x] Make an API call to an API of your choice using AsyncHTTPClient
-- [x] Implement a RecyclerView to display a list of entries from the API
-- [x] Display at least three (3) pieces of data for each RecyclerView item
+- [x] App contains a RecyclerView that displays a list of scrollable data
+- [x] App displays at least two (2) pieces of data for each RecyclerView item
+- [x] Use a downloadable font with custom color and size
+- [x] Modify the theme of the app in `themes.xml`
+- [x] Define and apply at least one style in **either** `themes.xml` or a new file `styles.xml`
 
 The following STRETCH features are implemented:
 
-- [ ] Add a UI element for the user to interact with API further
-- [ ] Show a `Toast` or `Snackbar` when an item is clicked
-- [ ] Add item dividers with `DividerItemDecoration`
+- [ ] Update the night theme to use different versions of styles when in dark mode
+- [ ] Use different drawables when in dark mode
 
 The following EXTRA features are implemented:
 
-- [ ] List anything else that you added to improve the app!
-
-- Updated MainActivity.kt: Implemented logic in MainActivity.kt to fetch Pokémon data from the PokeAPI and populate the RecyclerView with Pokémon entries.
-- Defined Pokemon Data Class: Created a data class named Pokemon to represent Pokémon objects, containing properties such as name, id, types, imageUrl, height, and weight.
+- [x] List anything else that you added to improve the app!
+  - RecyclerView with Separator: Added a separator line between each item in the RecyclerView, providing visual distinction and improving the layout's readability.
 
 ## Video Demo
 
 Here's a video / GIF that demos all of the app's implemented features:
 
-<img src='https://i.imgur.com/jCL1MYu.gif' title='Video Demo' width='' alt='Video Demo' />
+<img src='https://i.imgur.com/MQIu99E.gif' title='Video Demo' width='' alt='Video Demo' />
 
 GIF created with **LICEcap**
 
@@ -51,6 +50,8 @@ GIF created with **LICEcap**
 ## Notes
 
 Here's a place for any other notes on the app, it's creation process, or what you learned this unit!
+- Understanding how different file paths can interact within the application
+- Played around with how different colors compliment each other
 
 ## License
 
