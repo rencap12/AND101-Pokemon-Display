@@ -16,6 +16,7 @@ class PokemonAdapter(private val pokemonList: List<Pokemon>) : RecyclerView.Adap
         val pokemonName: TextView = itemView.findViewById(R.id.pokemon_name)
         val pokemonHeight: TextView = itemView.findViewById(R.id.pokemon_height)
         val pokemonWeight: TextView = itemView.findViewById(R.id.pokemon_weight)
+        val separator: View = itemView.findViewById(R.id.separator)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PokemonViewHolder {
@@ -29,6 +30,12 @@ class PokemonAdapter(private val pokemonList: List<Pokemon>) : RecyclerView.Adap
         holder.pokemonHeight.text = "Height: ${pokemon.height}"
         holder.pokemonWeight.text = "Weight: ${pokemon.weight}"
         Glide.with(holder.itemView.context).load(pokemon.imageUrl).into(holder.pokemonImage)
+
+         if (position == itemCount - 1) {
+         holder.separator.visibility = View.GONE // Hide separator for the last item
+        } else {
+                holder.separator.visibility = View.VISIBLE
+        }
     }
 
     override fun getItemCount(): Int {

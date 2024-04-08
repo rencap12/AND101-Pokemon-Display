@@ -22,23 +22,27 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:fontFamily="@font/fugaz_one"
+        android:textColor="#21804B"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/pokemon_image"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/pokemon_image"/>
+        app:layout_constraintStart_toEndOf="@+id/pokemon_image"
+        app:layout_constraintTop_toTopOf="@+id/pokemon_image" />
 
     <TextView
         android:id="@+id/pokemon_height"
+        style="@style/CustomFontStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        app:layout_constraintStart_toEndOf="@+id/pokemon_image"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pokemon_name"/>
+        app:layout_constraintStart_toEndOf="@+id/pokemon_image"
+        app:layout_constraintTop_toBottomOf="@+id/pokemon_name" />
 
     <TextView
         android:id="@+id/pokemon_weight"
+        style="@style/CustomFontStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -47,5 +51,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="@+id/pokemon_image"
         app:layout_constraintTop_toBottomOf="@+id/pokemon_height"/>
+
+    <View
+        android:id="@+id/separator"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintTop_toBottomOf="@id/pokemon_weight" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

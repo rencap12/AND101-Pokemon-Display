@@ -3,7 +3,19 @@
     <style name="Base.Theme.And101_p5_api_curr" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/defaultBackground</item>
     </style>
+
+    <style name="CustomFontStyle">
+        <item name="android:fontFamily">@font/fugaz_one</item>
+        <item name="android:textColor">#492B14</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="CustomButtonStyle" parent="Widget.Material3.Button">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
 
     <style name="Theme.And101_p5_api_curr" parent="Base.Theme.And101_p5_api_curr" />
 </resources>
