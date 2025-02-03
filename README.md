@@ -4,7 +4,7 @@
 
 Submitted by: **Reneca Capuno**
 
-Time spent: **3** hours spent in total
+Time spent: **7** hours spent in total
 
 ## Summary
 
